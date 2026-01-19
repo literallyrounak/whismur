@@ -46,35 +46,46 @@ function App() {
 
   return (
     <div className="chat-container">
-      <h1>Simple Chat App</h1>
-      <h3>Your name: <span style={{ color: 'green' }}>{username || 'Connecting...'}</span></h3>
-
-      <div className="messages-container">
-        {messages.map((msg, index) => (
-          <div 
-            key={index} 
-            className={`message ${msg.username === username ? 'own-message' : ''}`}
-          >
-            <strong>{msg.username}: </strong>
-            {msg.text}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+      <div className="chat-header">
+        <h1>whismur</h1>
+        <div className="user-info">
+          You are: <span className="username">{username || 'Connecting...'}</span>
+        </div>
       </div>
 
-      <form onSubmit={sendMessage} className="message-form">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
-          disabled={!socket}
-        />
-        <button type="submit" disabled={!socket || !input.trim()}>
-          Send
-        </button>
-      </form>
+    <div className="messages-container">
+      {messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`message ${
+            msg.username === 'System' 
+              ? 'system' 
+              : msg.username === username 
+                ? 'own' 
+                : 'other'
+          }`}
+        >
+          {msg.username !== 'System' && msg.username !== username && (
+            <span className="sender">{msg.username}</span>
+          )}
+          {msg.text}
+        </div>
+      ))}
     </div>
+
+    <form onSubmit={sendMessage} className="message-form">
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Type your message..."
+        disabled={!socket}
+      />
+      <button type="submit" disabled={!socket || !input.trim()}>
+        Send
+      </button>
+    </form>
+  </div>
   );
 }
 

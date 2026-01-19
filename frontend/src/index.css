@@ -1,13 +1,207 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --whismur-pink:    #f8c8dc;
+  --whismur-pink-dk: #e69ab8;
+  --whismur-lavender:#d7c2ff;
+  --whismur-mint:    #c4f4e6;
+  --bg-light:        #fdfaff;
+  --bg-card:         rgba(255, 250, 252, 0.92);
+  --text-primary:    #2d1b3a;
+  --text-secondary:  #6b5b7a;
+  --border-soft:     rgba(232, 182, 212, 0.4);
+  --shadow-soft:     0 8px 32px rgba(232, 182, 212, 0.18);
+  --radius-lg:       24px;
+  --radius-md:       16px;
+  --radius-pill:     9999px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #fff5f9 0%, #f0e8ff 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.chat-container {
+  height: 96vh;
+  max-width: 1080px;
+  margin: 2vh auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.chat-header {
+  padding: 1.1rem 1.8rem;
+  background: linear-gradient(to right, var(--whismur-pink), var(--whismur-lavender));
+  color: #3a1f2e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+.chat-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.user-info {
+  font-size: 0.92rem;
+  opacity: 0.95;
+}
+
+.username {
+  color: #4a2c3f;
+  font-weight: 600;
+}
+
+.messages-container {
+  padding: 1.6rem 1.8rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  background: linear-gradient(to bottom, rgba(253,250,255,0.7), var(--bg-light));
+}
+
+.message {
+  max-width: 76%;
+  padding: 0.95rem 1.4rem;
+  border-radius: 1.8rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  position: relative;
+  transition: all 0.18s ease;
+}
+
+.message:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(230, 154, 184, 0.15);
+}
+
+.message.own {
+  align-self: flex-end;
+  background: var(--whismur-pink-dk);
+  color: white;
+  border-bottom-right-radius: 0.7rem;
+  box-shadow: 0 4px 18px rgba(230, 154, 184, 0.28);
+}
+
+.message.other {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid var(--border-soft);
+  border-bottom-left-radius: 0.7rem;
+  color: var(--text-primary);
+}
+
+.message.system {
+  align-self: center;
+  background: rgba(215, 194, 255, 0.25);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: 1.4rem;
+  max-width: 65%;
+}
+
+.sender {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.message-form {
+  padding: 1.2rem 1.8rem;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  background: rgba(248, 200, 220, 0.25);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.22s ease;
+}
+
+.message-form input:focus {
+  border-color: var(--whismur-lavender);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(215, 194, 255, 0.3);
+}
+
+.message-form button {
+  padding: 0 2.2rem;
+  height: 48px;
+  background: var(--whismur-pink-dk);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.message-form button:hover:not(:disabled) {
+  background: #d68db0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(214, 141, 176, 0.3);
+}
+
+.message-form button:disabled {
+  background: #d1c4d8;
+  cursor: not-allowed;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.messages-container::-webkit-scrollbar-thumb {
+  background: var(--whismur-lavender);
+  border-radius: 10px;
+}
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: var(--whismur-pink-dk);
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .messages-container {
+    padding: 1.2rem;
+  }
+  
+  .message-form {
+    padding: 1rem 1.2rem;
+  }
 }
