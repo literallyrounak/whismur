@@ -1,0 +1,14 @@
+{
+  "name": "whismur",
+  "version": "1.0.0",
+  "description": "A real-time chat application",
+  "main": "backend/server.js",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "node backend/server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

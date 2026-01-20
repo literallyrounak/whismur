@@ -1,11 +1,15 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, "http://localhost:3000"] : ["http://localhost:3000"];
+
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] }
+  cors: { origin: allowedOrigins, methods: ["GET", "POST"] }
 });
 
 const users = new Map();
@@ -147,4 +151,13 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(5000, () => console.log('Server running on port 5000'));
+// Serve static files from frontend build
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// Fallback to index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
