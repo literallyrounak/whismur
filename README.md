@@ -1,15 +1,56 @@
-# whismur
-A real time chat application using React, Express, and Socket.io
+# Whismur Chat
 
-Day 1: I got the mvp working, using express and socket.io to setup the server. As soon as the user connects, the backend gives it a username and it is shown on the app. When someone disconnects, it prints the disconnection method to the console. Each message is shown through the emit command. I'm planning on adding custom usernames, number of online users currently & adding rooms/channels (like discord) tomorrow. That's it for day 1.
+A cozy, real-time private messaging app inspired by the gentle vibe of Whismur (the pink whispering Pokémon).
 
-Day 2: 
-      Session 1:
-            CSS overhaul 1: I changed the overall css theme to match with whismur's color pallete. Although, there's no dark theme right now. I will focus on it later on. Right now, I need to focus on adding                              useful features such as adding authentication, creating rooms & lobbies (like discord), typing receipts, etc.
-      Session 2:
-            Authentication: Added Login/Signup Authentication with passwords.
-            Direct Messaging: DMs now work and it's not just a group chat any more. You have to add the username for whom you want to DM. This one took forever to debug...
-            Profile: You can see your profile now, tho its just your username and nothing else. also, you can change your username.
-            'Typing' indicator: You can see when someone is typing...
-      Overall session two was a nightmare. I don't think I have the energy to do anything more now. I've also skipped 3 classes for this session. It may be the final version.
-      
+Just two people, one quiet conversation.
+
+## What it does
+
+- Sign up or log in with a username + password
+- Start direct messages with anyone
+- See messages in real-time
+- Know when someone is typing
+- See when your messages have been read
+- Change your display name whenever you want
+
+## Features
+
+- Private 1:1 chats only (no group rooms yet)
+- Typing indicators
+- Read receipts ("Seen by 2")
+- Message timestamps ("just now", "5 min ago", etc.)
+- Sidebar with your active conversations
+- Profile modal to update your name
+
+## Tech stack
+
+- Frontend: React + Socket.io-client
+- Backend: Node.js + Express + Socket.io
+- In-memory storage (for now — restarts wipe everything)
+
+## How to run locally
+
+1. Backend
+```bash
+cd backend
+npm install
+node server.js
+```
+2. Frontend
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Open http://localhost:3000 in two different tabs (or browsers) → sign up with different usernames → start chatting.
+
+## Planned next steps
+
+- Save messages & users in a real database
+- Actually hash passwords (right now they're plain text — oops)
+- Add a public chat room option
+- Online status / user list
+- Message reactions or emojis
+
+### Created by Rounak.
